@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-request-processing-service-v2
+  labels:
+    app: bank-request-processing-service
+    version: v2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bank-request-processing-service
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: bank-request-processing-service
+        version: v2
+    spec:
+      containers:
+      - name: bank-request-processing-service
+        image: bank-request-processing-service-image-v2
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8084
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        securityContext:
+          runAsUser: 1000
+      volumes:
+      - name: tmp
+        emptyDir: {}
+---

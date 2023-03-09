@@ -1,0 +1,2 @@
+docker rm -f bank-reception-service || true
+docker run -p 127.0.0.1:8083:8083 --name bank-reception-service --link bank-mysql-server --link bank-result-service --link bank-request-processing-service bank-reception-service-image

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-result-service-v2
+  labels:
+    app: bank-result-service
+    version: v2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bank-result-service
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: bank-result-service
+        version: v2
+    spec:
+      containers:
+      - name: bank-result-service
+        image: bank-result-service-image-v2
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8085
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        securityContext:
+          runAsUser: 1000
+      volumes:
+      - name: tmp
+        emptyDir: {}
+---

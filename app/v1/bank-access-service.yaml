@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bank-access-service
+  labels:
+    app: bank-access-service
+    service: bank-access-service
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: bank-access-service
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: bank-access-service
+  labels:
+    account: bank-access-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-access-service-v1
+  labels:
+    app: bank-access-service
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bank-access-service
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: bank-access-service
+        version: v1
+    spec:
+      containers:
+      - name: bank-access-service
+        image: bank-access-service-image
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+        securityContext:
+          runAsUser: 1000
+      volumes:
+      - name: tmp
+        emptyDir: {}
+---

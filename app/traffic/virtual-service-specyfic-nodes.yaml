@@ -1,0 +1,27 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: bank-reception-service
+spec:
+  hosts:
+  - bank-reception-service
+  http:
+  - route:
+    - destination:
+        host: bank-reception-service
+        subset: v1
+
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: bank-request-processing-service
+spec:
+  hosts:
+  - bank-request-processing-service
+  http:
+  - route:
+    - destination:
+        host: bank-request-processing-service
+        subset: v2
+---
