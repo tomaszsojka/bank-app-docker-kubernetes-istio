@@ -6,6 +6,15 @@ An application with a simple operation that simulates an ATM. The task was to sp
 
 Project prepared during the exhange in the University of Alcala. In the /doc folder there is a document with a description of the project.
 
+<!-- SCREENSHOTS -->
+## 2. Running pods and traffic visualization
+
+| ![pods running](https://github.com/tomaszsojka/bank-app-docker-kubernetes-istio/blob/main/doc/screenshots/pods.png?raw=true) |
+|:--:|
+| *Running services in 3 instances, 2 of the services are working in 2 different versions.* |
+| ![istio traffic visualization](https://github.com/tomaszsojka/bank-app-docker-kubernetes-istio/blob/main/doc/screenshots/traffic_istio.png?raw=true) |
+| *Visualization of the traffic between services, using Istio.* |
+
 <!-- FRAMEWORKS -->
 ## 3. Frameworks
 
